@@ -1,0 +1,90 @@
+{
+  "name": "@octokit/plugin-rest-endpoint-methods",
+  "version": "0.0.0-development",
+  "type": "module",
+  "description": "Octokit plugin adding one method for all of api.github.com REST API endpoints",
+  "scripts": {
+    "build": "node scripts/build.mjs && tsc -p tsconfig.json",
+    "lint": "prettier --check '{src,test,scripts}/**/*' '!scripts/update-endpoints/generated/**' '!src/generated/**' README.md package.json",
+    "lint:fix": "prettier --write '{src,test,scripts}/**/*' '!scripts/update-endpoints/generated/**' '!src/generated/**' README.md package.json",
+    "pretest": "npm run -s lint",
+    "test": "vitest run --coverage",
+    "update-endpoints": "npm run update-endpoints:fetch-json && npm run update-endpoints:code && npm run update-endpoints:docs && npm run update-endpoints:types",
+    "update-endpoints:fetch-json": "node scripts/update-endpoints/fetch-json.mjs",
+    "update-endpoints:code": "node scripts/update-endpoints/code.mjs",
+    "update-endpoints:docs": "node scripts/update-endpoints/docs.mjs",
+    "update-endpoints:types": "node scripts/update-endpoints/types.mjs"
+  },
+  "repository": "github:octokit/plugin-rest-endpoint-methods.js",
+  "keywords": [
+    "github",
+    "api",
+    "sdk",
+    "toolkit"
+  ],
+  "author": "Gregor Martynus (https://twitter.com/gr2m)",
+  "license": "MIT",
+  "dependencies": {
+    "@octokit/types": "^14.0.0"
+  },
+  "devDependencies": {
+    "@octokit/core": "^6.0.0",
+    "@octokit/tsconfig": "^4.0.0",
+    "@types/node": "^22.0.0",
+    "@vitest/coverage-v8": "^3.0.5",
+    "camelcase": "^8.0.0",
+    "esbuild": "^0.25.0",
+    "fetch-mock": "^12.0.0",
+    "github-openapi-graphql-query": "^5.0.0",
+    "glob": "^11.0.0",
+    "prettier": "3.5.3",
+    "semantic-release-plugin-update-version-in-files": "^2.0.0",
+    "sinon": "^20.0.0",
+    "sort-keys": "^5.0.0",
+    "string-to-jsdoc-comment": "^1.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^3.0.5"
+  },
+  "peerDependencies": {
+    "@octokit/core": ">=6"
+  },
+  "release": {
+    "branches": [
+      "+([0-9]).x",
+      "main",
+      "next",
+      {
+        "name": "beta",
+        "prerelease": true
+      }
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/github",
+      [
+        "@semantic-release/npm",
+        {
+          "pkgRoot": "./pkg"
+        }
+      ],
+      [
+        "semantic-release-plugin-update-version-in-files",
+        {
+          "files": [
+            "pkg/dist-web/*",
+            "pkg/dist-node/*",
+            "pkg/*/version.*"
+          ]
+        }
+      ]
+    ]
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "engines": {
+    "node": ">= 18"
+  }
+}

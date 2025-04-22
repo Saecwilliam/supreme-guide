@@ -1,0 +1,74 @@
+---
+name: List repository notifications for the authenticated user
+example: octokit.rest.activity.listRepoNotificationsForAuthenticatedUser({ owner, repo })
+route: GET /repos/{owner}/{repo}/notifications
+scope: activity
+type: API method
+---
+
+# List repository notifications for the authenticated user
+
+Lists all notifications for the current user in the specified repository.
+
+```js
+octokit.rest.activity.listRepoNotificationsForAuthenticatedUser({
+  owner,
+  repo,
+});
+```
+
+## Parameters
+
+<table>
+  <thead>
+    <tr>
+      <th>name</th>
+      <th>required</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>owner</td><td>yes</td><td>
+
+The account owner of the repository. The name is not case sensitive.
+
+</td></tr>
+<tr><td>repo</td><td>yes</td><td>
+
+The name of the repository without the `.git` extension. The name is not case sensitive.
+
+</td></tr>
+<tr><td>all</td><td>no</td><td>
+
+If `true`, show notifications marked as read.
+
+</td></tr>
+<tr><td>participating</td><td>no</td><td>
+
+If `true`, only shows notifications in which the user is directly participating or mentioned.
+
+</td></tr>
+<tr><td>since</td><td>no</td><td>
+
+Only show results that were last updated after the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+
+</td></tr>
+<tr><td>before</td><td>no</td><td>
+
+Only show notifications updated before the given time. This is a timestamp in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format: `YYYY-MM-DDTHH:MM:SSZ`.
+
+</td></tr>
+<tr><td>per_page</td><td>no</td><td>
+
+The number of results per page (max 100). For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+
+</td></tr>
+<tr><td>page</td><td>no</td><td>
+
+The page number of the results to fetch. For more information, see "[Using pagination in the REST API](https://docs.github.com/rest/using-the-rest-api/using-pagination-in-the-rest-api)."
+
+</td></tr>
+  </tbody>
+</table>
+
+See also: [GitHub Developer Guide documentation](https://docs.github.com/rest/activity/notifications#list-repository-notifications-for-the-authenticated-user).
